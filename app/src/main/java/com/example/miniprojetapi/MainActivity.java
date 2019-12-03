@@ -63,7 +63,11 @@ public class MainActivity extends AppCompatActivity {
                             String key = entry.getValue().getAsJsonObject().get("key").getAsString();
                             String name = entry.getValue().getAsJsonObject().get("name").getAsString();
                             String title = entry.getValue().getAsJsonObject().get("title").getAsString();
-                            Champion champ = new Champion ( key, name,title);
+
+                            JsonObject img = (JsonObject) entry.getValue().getAsJsonObject().get("image");
+                            String imgName = img.get("full").getAsString();
+
+                            Champion champ = new Champion ( key, name,title,imgName);
 
                             Log.println(Log.DEBUG,"tag",champ.getName());
                             mAdapter . add ( champ );

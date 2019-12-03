@@ -38,7 +38,7 @@ public class ChampionAdapter extends ArrayAdapter<Champion> {
         Champion currentChamp = champList.get(position);
 
         ImageView image = (ImageView)listItem.findViewById(R.id.imageView_poster);
-        Picasso.get().load("http://ddragon.leagueoflegends.com/cdn/9.23.1/img/champion/"+currentChamp.getName()+".png").into(image);
+        Picasso.get().load("http://ddragon.leagueoflegends.com/cdn/9.23.1/img/champion/"+currentChamp.getImg()).into(image);
 
 
         TextView name = (TextView) listItem.findViewById(R.id.textView_name);

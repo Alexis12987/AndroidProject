@@ -4,12 +4,14 @@ public class Champion {
     private String key;
     private String name;
     private String title;
+    private String image;
 
-    public Champion( String key, String name, String title) {
+    public Champion( String key, String name, String title,String img) {
 
         this.key = key;
         this.name = name;
         this.title = title;
+        this.image=img;
     }
 
     // Getter Methods
@@ -26,6 +28,9 @@ public class Champion {
         return title;
     }
 
+    public String getImg() {
+        return image;
+    }
 
 
 
