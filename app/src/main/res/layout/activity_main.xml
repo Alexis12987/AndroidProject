@@ -9,6 +9,16 @@
     <ListView
         android:id="@+id/listchamp"
         android:layout_width="match_parent"
-        android:layout_height="474dp" />
+        android:layout_height="553dp"
+        android:translationY="50dp" />
+
+    <EditText
+        android:id="@+id/inputSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:translationX="50dp"
+        android:translationY="10dp" />
 
 </RelativeLayout>

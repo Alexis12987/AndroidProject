@@ -3,6 +3,8 @@ package com.example.miniprojetapi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -31,11 +33,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListView listChampView = (ListView) findViewById(R.id.listchamp);
+        TextView inputSearch = (TextView) findViewById((R.id.inputSearch));
         ArrayList< Champion > listChamp = new ArrayList< Champion >();
-        /*final ArrayAdapter< Champion > monAdapteur
-                = new ArrayAdapter < Champion >( MainActivity . this ,
-                android . R . layout . simple_list_item_1 ,
-                listChamp );*/
+
         final ChampionAdapter mAdapter = new ChampionAdapter(this,listChamp);
 
         listChampView.setAdapter(mAdapter);
@@ -53,12 +53,8 @@ public class MainActivity extends AppCompatActivity {
                         JsonObject data = result.get("data").getAsJsonObject();
 
 
-                        //for(int i=0;i<result.get("data").getAsJsonObject().size();i++) {
+
                         for (Map.Entry<String, JsonElement> entry : data.entrySet()){
-                            /*JsonObject champjson = data.get("Aatrox").getAsJsonObject();
-                            String key = champjson . getAsJsonPrimitive("key"). getAsString ();
-                            String name = champjson . getAsJsonPrimitive ("name"). getAsString ();
-                            String title = champjson . getAsJsonPrimitive ("title").getAsString();*/
 
                             String key = entry.getValue().getAsJsonObject().get("key").getAsString();
                             String name = entry.getValue().getAsJsonObject().get("name").getAsString();
@@ -69,12 +65,31 @@ public class MainActivity extends AppCompatActivity {
 
                             Champion champ = new Champion ( key, name,title,imgName);
 
-                            Log.println(Log.DEBUG,"tag",champ.getName());
+                           // Log.println(Log.DEBUG,"tag",champ.getName());
                             mAdapter . add ( champ );
 
                         }
-                        // do stuff with the result or error
                     }
                 });
+        inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (count < before) {
+                    mAdapter.resetData();
+                }
+
+                mAdapter.getFilter().filter(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 }
