@@ -1,6 +1,8 @@
 package com.example.miniprojetapi;
 
-public class Champion {
+import java.io.Serializable;
+
+public class Champion implements Serializable {
     private String key;
     private String name;
     private String title;
@@ -52,4 +54,5 @@ public class Champion {
 
 
 
+    public String toString(){ return name; }
 }

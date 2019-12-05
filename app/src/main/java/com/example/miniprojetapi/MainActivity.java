@@ -2,12 +2,16 @@ package com.example.miniprojetapi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +24,7 @@ import com.koushikdutta.ion.Ion;
 import org.json.JSONObject;
 
 import java.io.Console;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -69,6 +74,19 @@ public class MainActivity extends AppCompatActivity {
                             mAdapter . add ( champ );
 
                         }
+
+                        listChampView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                //String item = (String) listChampView.getItemAtPosition(position).toString();
+                                //Log.d("Click", "You selected : " + item);
+
+                                Intent intent = new Intent(MainActivity.this, ChampionFocusActivity.class);
+                                intent.putExtra("champion", (Serializable) listChampView.getItemAtPosition(position));
+                                startActivity(intent);
+                            }
+                        });
+                        // do stuff with the result or error
                     }
                 });
         inputSearch.addTextChangedListener(new TextWatcher() {
